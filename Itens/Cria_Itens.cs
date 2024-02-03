@@ -10,6 +10,8 @@ public class Cria_Itens : MonoBehaviour
 
     public AudioSource aS;
     public AudioClip criaSuper;
+    public AudioClip closeBag;
+    public AudioClip dna;
 
     private Cenoura_Laranja cenouraLaranja;
     private Cenoura_Preta cenouraPreta;
@@ -52,6 +54,7 @@ public class Cria_Itens : MonoBehaviour
         if (inventario != null)
         {
             inventario.AdicionaItem(cenouraLaranja);
+            SomPegouCenouraNormal();
         }
 
     }
@@ -67,13 +70,23 @@ public class Cria_Itens : MonoBehaviour
         if (inventario != null)
         {
             inventario.AdicionaItem(cenouraPreta);
+            SomPegouCenouraNormal();
         }
 
     }
-
+    public void SomPegouCenouraNormal()
+    {
+        aS.clip = closeBag;
+        aS.Play();
+    }
     public void SomCriaSuper()
     {
         aS.clip = criaSuper;
+        aS.Play();
+    }
+    public void SomCriaDNA()
+    {
+        aS.clip = dna;
         aS.Play();
     }
     public void CriaSuperCenouraAzul()
@@ -144,6 +157,8 @@ public class Cria_Itens : MonoBehaviour
 
         //iT.SetRecebeMenssagem("2x DNA Criam uma Super Cenoura");
 
+        SomCriaDNA();
+
         if (inventario != null)
         {
             dnaAzul.SetQuantidade(+1);
@@ -162,6 +177,8 @@ public class Cria_Itens : MonoBehaviour
         dnaLaranja.SetNome("DNA Laranja");
 
         Debug.Log("Criou DNA Laranja");
+
+        SomCriaDNA();
 
         //iT.SetRecebeMenssagem("2x DNA Criam uma Super Cenoura");
 
@@ -184,6 +201,8 @@ public class Cria_Itens : MonoBehaviour
 
         Debug.Log("Criou DNA Preto");
 
+        SomCriaDNA();
+
         //iT.SetRecebeMenssagem("2x DNA Criam uma Super Cenoura");
 
         if (inventario != null)
@@ -204,6 +223,8 @@ public class Cria_Itens : MonoBehaviour
         dnaVerde.SetNome("DNA Verde");
 
         Debug.Log("Criou DNA Verde");
+
+        SomCriaDNA();
 
         if (inventario != null)
         {

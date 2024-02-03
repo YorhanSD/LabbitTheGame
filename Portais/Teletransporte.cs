@@ -11,6 +11,9 @@ public class Teletransporte : MonoBehaviour
     [SerializeField] private Player_PegaItens playerPegaItens;
     [SerializeField] private Player_Bencaos playerBencaos;
 
+    public AudioSource aS;
+    public AudioClip openDoor;
+
     public GameObject cam;
     public GameObject tela;
     public string nomeFase;
@@ -25,7 +28,10 @@ public class Teletransporte : MonoBehaviour
     public bool portaTrancada;
     public bool ultimaPorta;
 
-  
+    public void Start()
+    {
+        aS = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter2D(Collider2D _player)
     {
@@ -33,6 +39,9 @@ public class Teletransporte : MonoBehaviour
         {
             if(portaTrancada == false)
             {
+                aS.clip = openDoor;
+                aS.Play();
+
                 PlayerTeleporte();
             }
             else

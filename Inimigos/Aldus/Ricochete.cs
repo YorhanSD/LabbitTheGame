@@ -8,16 +8,8 @@ public class Ricochete : MonoBehaviour
     public Transform pontoDisparo;
     public Transform posicaoPlayer;
     public bool ladoDireito;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    private bool podeDisparar = true;
+    
 
     void Flip()
     {
@@ -33,8 +25,10 @@ public class Ricochete : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Serra") 
+        if(collision.gameObject.tag == "Serra" && podeDisparar == true) 
         {
+            StartCoroutine(Recarregar());
+
             Flip();
 
             SerraMovimento();
@@ -55,6 +49,15 @@ public class Ricochete : MonoBehaviour
             //Importa o void inicializar com o componente de direcao do script da cenoura
             serraTemp.GetComponent<Seringa>().Inicializar(Vector2.left);
         }
+    }
+
+    public IEnumerator Recarregar()
+    {
+        podeDisparar = false;
+
+        yield return new WaitForSecondsRealtime(1);
+
+        podeDisparar = true;
     }
 
 }

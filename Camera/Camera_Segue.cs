@@ -10,6 +10,7 @@ public class Camera_Segue : MonoBehaviour
     Vector3 novaPosicao;
     Controle_Emocional cE;
     public Camera cam;
+    [SerializeField] private Aldus_Especial aldusEspecial;
 
     void Awake()
     {
@@ -22,17 +23,24 @@ public class Camera_Segue : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (cE.emocaoSlider.value >= 100)
+        if (aldusEspecial.GetEspecial() == false)
         {
-            camFar();
-        }
-        else if (cE.emocaoSlider.value <= 0)
-        {
-            camNear();
+            if (cE.emocaoSlider.value >= 100)
+            {
+                camFar();
+            }
+            else if (cE.emocaoSlider.value <= 0)
+            {
+                camNear();
+            }
+            else
+            {
+                camNormal();
+            }
         }
         else
         {
-            camNormal();
+            CameraAldusEspecial();
         }
 
         if (playerPosicao != null)
@@ -43,60 +51,42 @@ public class Camera_Segue : MonoBehaviour
         }
     }
 
-    void camNear()
+    public void CameraAldusEspecial()
+    {
+
+        if (cam.orthographicSize < 50)
+        {
+            cam.orthographicSize += 10f * Time.deltaTime;
+        }
+    }
+
+    public void camNear()
     {
         segueVelocidade = 10f;
 
         if (cam.orthographicSize < 25)
         {
-            cam.orthographicSize += 1 * Time.deltaTime;
-        }
-
-        if (gameObject.transform.position.y < 24 && yOffSet < 18)
-        {
-            //yOffSet += 2 * Time.deltaTime;
-        }
-        else if (yOffSet > 17)
-        {
-            //yOffSet = 18;
+            cam.orthographicSize += 0.7f * Time.deltaTime;
         }
     }
 
-    void camNormal()
+    public void camNormal()
     {
         segueVelocidade = 1f;
 
-        if (cam.orthographicSize > 20)
+        if (cam.orthographicSize > 18)
         {
-            cam.orthographicSize -= 3 * Time.deltaTime;
-        }
-
-        if(gameObject.transform.position.y < 18 && yOffSet < 12)
-        {
-            //yOffSet += 2 * Time.deltaTime;
-        }
-        else if(yOffSet > 11)
-        {
-            //yOffSet = 12;
+            cam.orthographicSize -= 3f * Time.deltaTime;
         }
     }
 
-    void camFar()
+    public void camFar()
     {
         segueVelocidade = 10f;
 
         if (cam.orthographicSize < 35)
         {
-            cam.orthographicSize += 1 * Time.deltaTime;
-        }
-
-        if (gameObject.transform.position.y < 30 && yOffSet < 24)
-        {
-            //yOffSet += 2 * Time.deltaTime;
-        }
-        else if (yOffSet > 23)
-        {
-            //yOffSet = 24;
+            cam.orthographicSize += 0.7f * Time.deltaTime;
         }
     }
 

@@ -22,7 +22,7 @@ public class Lampada_Pisca : MonoBehaviour
         luz.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         luz.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(3f);
         luz.SetActive(true);
 
         StartCoroutine(Intervalo());

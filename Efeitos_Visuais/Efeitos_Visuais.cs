@@ -9,6 +9,7 @@ public class Efeitos_Visuais : MonoBehaviour
 {
     public float transparencia = 0;
 
+    //[SerializeField] private Camera_Segue cameraSegue;
     [SerializeField] private Controle_Emocional controleEmocional;
 
     public AudioSource aS;
@@ -17,14 +18,17 @@ public class Efeitos_Visuais : MonoBehaviour
     public Light2D luzGlobalMedo;
     public Light2D luzGlobalNormal;
 
-    public Image[] imagens;
-
     private void FixedUpdate()
     {
-        Enel();
+        VerificaBarra();
     }
 
-    public bool Enel()
+    public void AldusEspecial()
+    {
+        controleEmocional.emocaoSlider.value = 50;
+    }
+
+    public bool VerificaBarra()
     {
         if (controleEmocional.emocaoSlider.value == 50)
         {
@@ -34,18 +38,12 @@ public class Efeitos_Visuais : MonoBehaviour
         }
         else if (controleEmocional.emocaoSlider.value == 100)
         {
-            aS.clip = trocaEstado;
-            aS.Play();
-
             AtivaTelaCoragem();
 
             return false;
         }
         else if (controleEmocional.emocaoSlider.value == 0)
         {
-            aS.clip = trocaEstado;
-            aS.Play();
-
             AtivaTelaMedo();
 
             return false;
@@ -75,7 +73,7 @@ public class Efeitos_Visuais : MonoBehaviour
 
         luzGlobalCoragem.gameObject.SetActive(true);
 
-        if (luzGlobalCoragem.intensity < 1.3)
+        if (luzGlobalCoragem.intensity < 1)
         {
             luzGlobalCoragem.intensity += 0.1f * Time.deltaTime;
         }
@@ -89,7 +87,7 @@ public class Efeitos_Visuais : MonoBehaviour
 
         luzGlobalMedo.gameObject.SetActive(true);
 
-        if (luzGlobalMedo.intensity < 1.3)
+        if (luzGlobalMedo.intensity < 1)
         {
             luzGlobalMedo.intensity += 0.1f * Time.deltaTime;
         }

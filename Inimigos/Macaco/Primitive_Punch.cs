@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Primitive_Punch : MonoBehaviour
 {
-    //public float posicaoInicial;
-    //public float posicaoFinal;
     public float raioArea;
 
     public string animacaoIdle;
     public string animacaoAtaque;
 
+    public bool ladoDireito;
     private bool proximoAtaque = true;
-    private bool ladoDireito;
     public bool isPlayer;
 
     public LayerMask playerLayer;
@@ -27,6 +25,8 @@ public class Primitive_Punch : MonoBehaviour
 
     private Animator anim;
     public AudioSource audioSource;
+    public AudioClip somAtaque;
+
     [SerializeField] private Inimigo_Patrulha inimigoPatrulha;
 
     private void Start()
@@ -89,6 +89,7 @@ public class Primitive_Punch : MonoBehaviour
 
         anim.SetTrigger(animacaoAtaque);
 
+        audioSource.clip = somAtaque;
         audioSource.Play();
 
         yield return new WaitForSecondsRealtime(1);

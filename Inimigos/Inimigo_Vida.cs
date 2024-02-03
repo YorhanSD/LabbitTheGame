@@ -10,11 +10,14 @@ public class Inimigo_Vida : MonoBehaviour
     public bool resistenciaCenouras = false;
     private int randomProbabilidade;
 
+    public AudioSource audioSource;
+    public AudioClip sofrendoDano;
     public Animator anim;
     public Text vidaTexto;
     public Slider barraDeVida;
     public GameObject[] dropItem;
     public GameObject inimigo;
+    public bool imune = false;
 
     public bool isAldos;
 
@@ -26,6 +29,7 @@ public class Inimigo_Vida : MonoBehaviour
 
     public void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }
 
@@ -35,13 +39,14 @@ public class Inimigo_Vida : MonoBehaviour
 
         if (barraDeVida.value <= 0)
         {
-            if (permitirDrop == true)
+            if (inimigoPatrulha != null)
             {
-                Drop();
+                inimigoPatrulha.SetPararInimigo(true);
             }
 
+            anim.SetTrigger("Death");
+
             GanharCoragem(50);
-            Morte();
         }
        
     }
@@ -132,10 +137,26 @@ public class Inimigo_Vida : MonoBehaviour
 
         Debug.Log("Dropou DNA Resultado : " + randomProbabilidade);
     }
+    public void ImuneDano()
+    {
+        imune =! imune;
+    }
+    public void ReproduzirSomSofrendoDano()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = sofrendoDano;
+            audioSource.Play();
+        }
+    }
     private void TomaDano(int _dano)
     {
-        barraDeVida.value -= _dano;
-        StartCoroutine(AnimacaoSofrendoDano());
+        if(imune != true)
+        {
+            barraDeVida.value -= _dano;
+            StartCoroutine(AnimacaoSofrendoDano());
+            ReproduzirSomSofrendoDano();
+        }
     }
 
     private IEnumerator AnimacaoSofrendoDano()
@@ -147,7 +168,7 @@ public class Inimigo_Vida : MonoBehaviour
 
         anim.SetTrigger("Suffering");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         if (inimigoPatrulha != null)
         {
@@ -161,10 +182,16 @@ public class Inimigo_Vida : MonoBehaviour
     }
     private void Morte()
     {
+        if (permitirDrop == true)
+        {
+            Drop();
+        }
+
         if (isAldos)
         {
             trocaDeEstado.AtivarAldosTunado();
         }
+
         Destroy(gameObject);
     }
 }

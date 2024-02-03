@@ -18,16 +18,16 @@ public class Inimigo_Patrulha : Movimento
 
     void FixedUpdate()
     {
-        if (GetParar() == false)
-        {
-            MovimentoHorizontal();
-        }
+        MovimentoHorizontal();
     }
 
     public override bool MovimentoHorizontal()
     {
-        return base.MovimentoHorizontal();
+        if (GetParar() == false)
+        {
+            return base.MovimentoHorizontal();
+        }
+
+        return false;
     }
-
-
 }

@@ -9,13 +9,14 @@ public class Player_Movimento : MonoBehaviour
     [Header ("Atributos de Movimentação")]
 
     [SerializeField] public float movimento;
-    [SerializeField][Range(15f,30f)] private float velocidade;
-    [SerializeField][Range(25f, 50f)] private float forcaPulo;
+    [SerializeField][Range(0f,30f)] private float velocidade;
+    [SerializeField][Range(0f, 50f)] private float forcaPulo;
     [SerializeField] private bool noChao;
     public bool ladoDireito = false;
 
     [SerializeField] private Player_Bencaos playerBencaos;
     [SerializeField] private Player_Physics playerPhysics;
+
     private SpriteRenderer sr;
     private Rigidbody2D rigid2D;
     private Animator anim;

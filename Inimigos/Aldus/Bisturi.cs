@@ -7,15 +7,15 @@ public class Bisturi : MonoBehaviour
     public int dano = 20;
     public float tempoDestruicao = 3f;
 
-
+    public AudioSource aS;
+    public AudioClip swordSlice;
     private Player_Vida playerVida;
-    private Controle_Emocional controleEmocional;
+    private Player_Suffering pS;
 
-    void Awake()
+    public void Awake()
     {
-        playerVida = GameObject.FindObjectOfType<Player_Vida>();
-        controleEmocional = GameObject.FindObjectOfType<Controle_Emocional>();
-        
+        playerVida = FindObjectOfType<Player_Vida>();
+        pS = FindObjectOfType<Player_Suffering>();
     }
     public void Start()
     {
@@ -24,15 +24,15 @@ public class Bisturi : MonoBehaviour
  
     public void OnTriggerEnter2D(Collider2D _player)
     {
-        /*
+        
         if (_player.gameObject.tag == "Player" && playerVida.GetImuneDano() == false)
         {
-            playerVida.SetImuneDano(true);
-            playerVida.barraDeVida.value -= dano;
-            controleEmocional.Medo(50);
-            Destroy(gameObject);
+            pS.SofrendoDano();
+
+            aS.clip = swordSlice;
+            aS.Play();
         }
-        */
+        
     }
    
     void Destruir()

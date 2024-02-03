@@ -7,6 +7,9 @@ public class ChuvaSeringas : MonoBehaviour
     public bool criar;
 
     Animator anim;
+    public AudioSource aS;
+    public AudioClip evilLaugh;
+    public AudioClip special;
 
     public GameObject laserEsq;
     public GameObject laserDir;
@@ -32,9 +35,12 @@ public class ChuvaSeringas : MonoBehaviour
     public int contagemSeringa;
     public int contagemLaser;
 
+    [SerializeField] private Camera_Segue cM;
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        aS = GetComponent<AudioSource>();
 
         StartCoroutine(DisparaAtaque());
 
@@ -90,6 +96,16 @@ public class ChuvaSeringas : MonoBehaviour
         }
     }
 
+    public void Celebrating()
+    {
+        if (aS != null)
+        {
+            aS.clip = evilLaugh;
+            aS.Play();
+            anim.SetTrigger("Celebrating");
+        }
+    }
+
     public IEnumerator DisparaLaser() 
     { 
         yield return new WaitForSeconds(intervalo);
@@ -123,6 +139,15 @@ public class ChuvaSeringas : MonoBehaviour
         if (punicaoAfiada == true)
         {
             anim.SetTrigger("Special");
+            //cM.aldusSpecial = true;
+            //cM.AldusSpecial();
+            aS.clip = special;
+            aS.Play();
+
+            yield return new WaitForSeconds(3.5f);
+
+            //cM.aldusSpecial = false;
+            cM.camNormal();
 
             contagemBisturi = 0;
 

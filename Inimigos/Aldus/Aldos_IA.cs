@@ -6,48 +6,39 @@ public class Aldos_IA : MonoBehaviour
 {
     [SerializeField] private Seringa Seringa;
 
-    public Transform posicaoPlayer;
-
-    public float velocidade;
-
-    public float rangeMaximo = 20;
-    public float rangeMinimo = 5;
-
-    public int numeroAleatorio;
-
-    Vector3 distanciaDoPlayer;
-
     public Rigidbody2D rigid2D;
     public SpriteRenderer sprite;
     public Animator anim;
     public LayerMask playerLayer;
+    private Vector3 distanciaDoPlayer;
     public AudioSource aS;
     public AudioClip roleta;
     public AudioClip metalImpacto;
     public AudioClip risada;
-
     public GameObject seringa;
     public GameObject serra;
+    public Transform posicaoPlayer;
     public Transform pontoDisparo;
     public Transform areaAtaque;
     public Transform areaDano;
-
-    public float raioArea;
-
     public string animacaoIdle;
     public string animacaoAtaque;
     public string animacaoSegundoAtaque;
     public string animacaoAtirar;
     public string animacaoSegundoAtirar;
-
+    public float raioArea;
+    public float velocidade;
+    public float rangeMaximo = 20;
+    public float rangeMinimo = 5;
     public float pocicaoAreaDano_X;
     public float pocicaoAreaDano_Y;
     public float pocicaoAreaAtaque_X;
     public float pocicaoAreaAtaque_Y;
-
+    public bool disparouSerra;
     public bool podeAtacar = true;
     public bool ladoDireito;
     public bool isPlayer;
+    public int numeroAleatorio;
 
     void Start()
     {
@@ -278,7 +269,6 @@ public class Aldos_IA : MonoBehaviour
 
     public void SeringaMovimento()
     {
-
         GameObject seringaTemp = (GameObject)(Instantiate(seringa, pontoDisparo.transform.position, Quaternion.identity));
 
         if (ladoDireito)
@@ -295,18 +285,17 @@ public class Aldos_IA : MonoBehaviour
 
     public void SerraMovimento()
     {
+            GameObject serraTemp = (GameObject)(Instantiate(serra, pontoDisparo.transform.position, Quaternion.identity));
 
-        GameObject serraTemp = (GameObject)(Instantiate(serra, pontoDisparo.transform.position, Quaternion.identity));
-
-        if (ladoDireito)
-        {
-            serraTemp.GetComponent<Seringa>().Inicializar(Vector2.right);
-        }
-        else
-        {
-            //Direciona a cenoura conforme a direcao que o personagem aponta
-            //Importa o void inicializar com o componente de direcao do script da cenoura
-            serraTemp.GetComponent<Seringa>().Inicializar(Vector2.left);
-        }
+            if (ladoDireito)
+            {
+                serraTemp.GetComponent<Seringa>().Inicializar(Vector2.right);
+            }
+            else
+            {
+                //Direciona a cenoura conforme a direcao que o personagem aponta
+                //Importa o void inicializar com o componente de direcao do script da cenoura
+                serraTemp.GetComponent<Seringa>().Inicializar(Vector2.left);
+            }
     }
 }
