@@ -14,8 +14,8 @@
 <ul>
   <li><h3>Processor: i3</h3></li>
   <li><h3>Video card: GeForce GT 730</h3></li>
-  <li><h3>RAM memory: 8 GB</h3></li>
-  <li><h3>Free storage: 1 GB</h3></li>
+  <li><h3>RAM memory: 4 GB</h3></li>
+  <li><h3>Free storage: 150 MB</h3></li>
 </ul>
 
 # History
