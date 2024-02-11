@@ -27,5 +27,5 @@
 
 ![](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-<h2><a href="https://yorhansd.itch.io/labbit">Labbit v5.4</a></h2>
+<h2><a href="https://drive.google.com/file/d/1wneMcq3swHEBe-1aPi9ciKNK1QzHX4fc/view?usp=sharing">Labbit v5.4</a></h2>
 <h2><a href="https://drive.google.com/drive/folders/1HXY1FwJ2XI6jajAKLoDzrkKPUSwTB23G?usp=drive_link">GDD / Pitch</a></h2>
