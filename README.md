@@ -6,7 +6,7 @@
 
 <h2>Genre: 2D Platform/Test Lab</h2>
 <h2>Platform: Windows 64 Bits</h2>
-<h2>Language: English</h2>
+<h2>Language: PT-BR</h2>
 <h2>Current Version: 5.4</h2>
   
 # Minimum Hardware Requirements
